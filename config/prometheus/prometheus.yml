@@ -137,14 +137,16 @@ scrape_configs:
 
   # ==================== TCP Probes (Blackbox Exporter) ====================
   - job_name: 'blackbox_tcp'
+    scrape_interval: 30s
+    scrape_timeout: 15s
     metrics_path: /probe
     params:
       module: [tcp_connect]
     static_configs:
       - targets:
-          - 167.86.110.201:6432   # TimescaleDB (PgBouncer)
-          - 167.86.110.201:9187   # Postgres exporter
-          - 217.216.73.20:9108    # Collector metrics
+          - "167.86.110.201:6432"
+          - "167.86.110.201:9187"
+          - "217.216.73.20:9108"
         labels:
           node: 'external'
     relabel_configs:
@@ -195,6 +197,7 @@ scrape_configs:
   # Collector Python service
   - job_name: 'collector'
     metrics_path: /metrics
+    scrape_timeout: 10s
     static_configs:
       - targets: ['217.216.73.20:9108']
         labels:

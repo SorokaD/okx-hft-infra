@@ -20,7 +20,7 @@
       "gridPos": {"h": 4, "w": 4, "x": 0, "y": 0},
       "id": 1,
       "options": {"colorMode": "background", "graphMode": "none", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
-      "targets": [{"expr": "up{job=\"collector\"}", "refId": "A"}],
+      "targets": [{"expr": "up{job=\"collector\"} or vector(0)", "refId": "A"}],
       "title": "Collector Up",
       "type": "stat"
     },

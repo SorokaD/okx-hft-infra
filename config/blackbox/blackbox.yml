@@ -34,6 +34,6 @@ modules:
 
   tcp_connect:
     prober: tcp
-    timeout: 10s
+    timeout: 8s
 
 

@@ -156,15 +156,16 @@ services:
     restart: unless-stopped
     privileged: true
     command:
-      - "--housekeeping_interval=30s"
+      - "--housekeeping_interval=15s"
       - "--docker_only=true"
+      - "--enable_metrics=cpu,memory,network,disk,diskIO,process"
     volumes:
       - /:/rootfs:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run:/var/run:ro
       - /sys:/sys:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /var/lib/docker/:/var/lib/docker:ro
       - /dev/disk/:/dev/disk:ro
-      - /cgroup:/cgroup:ro
     devices:
       - /dev/kmsg
     networks:

@@ -36,7 +36,7 @@
       "gridPos": {"h": 4, "w": 4, "x": 4, "y": 0},
       "id": 2,
       "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
-      "targets": [{"expr": "sum(pg_stat_activity_count{job=\"postgres_timescale\"})", "refId": "A"}],
+      "targets": [{"expr": "sum(pg_stat_database_numbackends{job=\"postgres_timescale\", datname!~\"template.*\"})", "refId": "A"}],
       "title": "Total Connections",
       "type": "stat"
     },
@@ -52,8 +52,8 @@
       "gridPos": {"h": 4, "w": 4, "x": 8, "y": 0},
       "id": 3,
       "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
-      "targets": [{"expr": "sum(pg_stat_activity_count{job=\"postgres_timescale\", state=\"active\"})", "refId": "A"}],
-      "title": "Active Connections",
+      "targets": [{"expr": "pg_stat_database_numbackends{job=\"postgres_timescale\", datname=\"okx_hft\"}", "refId": "A"}],
+      "title": "okx_hft Connections",
       "type": "stat"
     },
     {
@@ -115,8 +115,8 @@
       "gridPos": {"h": 6, "w": 12, "x": 12, "y": 12},
       "id": 8,
       "options": {"legend": {"calcs": ["lastNotNull"], "displayMode": "table", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi"}},
-      "targets": [{"expr": "pg_stat_activity_count{job=\"postgres_timescale\"}", "legendFormat": "{{ state }}", "refId": "A"}],
-      "title": "Connections by State",
+      "targets": [{"expr": "pg_stat_database_numbackends{job=\"postgres_timescale\", datname!~\"template.*\"}", "legendFormat": "{{ datname }}", "refId": "A"}],
+      "title": "Connections by Database",
       "type": "timeseries"
     }
   ],

@@ -67,12 +67,12 @@
       "options": {"colorMode": "value", "graphMode": "none", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
       "targets": [
         {
-          "expr": "count(traefik_service_server_up{job=\"traefik\"})",
-          "legendFormat": "Services",
+          "expr": "count(count by (router) (traefik_router_requests_total{job=\"traefik\"}))",
+          "legendFormat": "Routers",
           "refId": "A"
         }
       ],
-      "title": "Active Services",
+      "title": "Active Routers",
       "type": "stat"
     },
     {
@@ -242,12 +242,12 @@
       "options": {"legend": {"calcs": ["mean", "max"], "displayMode": "table", "placement": "right", "showLegend": true, "sortBy": "Max", "sortDesc": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
       "targets": [
         {
-          "expr": "sum(rate(traefik_service_requests_total{job=\"traefik\"}[5m])) by (service)",
-          "legendFormat": "{{service}}",
+          "expr": "sum(rate(traefik_router_requests_total{job=\"traefik\"}[5m])) by (router)",
+          "legendFormat": "{{router}}",
           "refId": "A"
         }
       ],
-      "title": "Requests by Service",
+      "title": "Requests by Router",
       "type": "timeseries"
     }
   ],

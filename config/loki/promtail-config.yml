@@ -18,6 +18,8 @@ scrape_configs:
           host: localhost
           __path__: /var/lib/docker/containers/*/*-json.log
     pipeline_stages:
-      - docker:
-
-
+      - docker: {}
+    relabel_configs:
+      - source_labels: ["__path__"]
+        regex: "/var/lib/docker/containers/([^/]+)/.*"
+        target_label: container_id
