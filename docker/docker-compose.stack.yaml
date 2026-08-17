@@ -157,8 +157,7 @@ services:
     privileged: true
     command:
       - "--housekeeping_interval=15s"
-      - "--docker_only=true"
-      - "--enable_metrics=cpu,memory,network,disk,diskIO,process"
+      - "--enable_metrics=cpu,memory,network,disk,diskIO,process,oom_event"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
@@ -199,6 +198,7 @@ services:
       - /var/log:/var/log:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - promtail_positions:/positions
     networks:
       - internal
     depends_on:
@@ -240,3 +240,4 @@ volumes:
   prometheus_data:
   grafana_data:
   loki_data:
+  promtail_positions:

@@ -64,7 +64,7 @@
       "gridPos": {"h": 4, "w": 6, "x": 12, "y": 1},
       "id": 4,
       "options": {"colorMode": "background", "graphMode": "none", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
-      "targets": [{"expr": "up{job=\"collector\"} or vector(0)", "refId": "A"}],
+      "targets": [{"expr": "max(up{job=\"collector\"}) or vector(0)", "refId": "A"}],
       "title": "Collector Metrics",
       "type": "stat"
     },
@@ -188,7 +188,7 @@
       "gridPos": {"h": 4, "w": 8, "x": 0, "y": 12},
       "id": 12,
       "options": {"colorMode": "background", "graphMode": "none", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
-      "targets": [{"expr": "probe_success{job=\"blackbox_tcp\", instance=~\".*:6432\"} or vector(0)", "refId": "A"}],
+      "targets": [{"expr": "max(probe_success{job=\"blackbox_tcp\", instance=~\".*:6432\"}) or vector(0)", "refId": "A"}],
       "title": "Timescale PgBouncer TCP",
       "type": "stat"
     },
@@ -206,7 +206,7 @@
       "gridPos": {"h": 4, "w": 8, "x": 8, "y": 12},
       "id": 13,
       "options": {"colorMode": "background", "graphMode": "none", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
-      "targets": [{"expr": "probe_success{job=\"blackbox_tcp\", instance=~\".*:9187\"} or vector(0)", "refId": "A"}],
+      "targets": [{"expr": "max(probe_success{job=\"blackbox_tcp\", instance=~\".*:9187\"}) or vector(0)", "refId": "A"}],
       "title": "Timescale Exporter TCP",
       "type": "stat"
     },
@@ -224,7 +224,7 @@
       "gridPos": {"h": 4, "w": 8, "x": 16, "y": 12},
       "id": 14,
       "options": {"colorMode": "background", "graphMode": "none", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
-      "targets": [{"expr": "probe_success{job=\"blackbox_tcp\", instance=~\".*:9108\"} or vector(0)", "refId": "A"}],
+      "targets": [{"expr": "max(probe_success{job=\"blackbox_tcp\", instance=~\".*:9108\"}) or vector(0)", "refId": "A"}],
       "title": "Collector Metrics TCP",
       "type": "stat"
     }

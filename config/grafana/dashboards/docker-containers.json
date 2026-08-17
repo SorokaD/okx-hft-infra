@@ -21,7 +21,7 @@
       "options": {"colorMode": "value", "graphMode": "none", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
       "targets": [
         {
-          "expr": "count(container_last_seen{job=\"cadvisor_ops\",name!=\"\",name!=\"/\",image!=\"\"})",
+          "expr": "count(count by (id) (container_memory_usage_bytes{job=\"cadvisor_ops\",id!=\"/\"}))",
           "legendFormat": "Running Containers",
           "refId": "A"
         }
@@ -44,7 +44,7 @@
       "options": {"colorMode": "value", "graphMode": "none", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
       "targets": [
         {
-          "expr": "sum(container_memory_usage_bytes{job=\"cadvisor_ops\",name!=\"\",name!=\"/\",image!=\"\"})",
+          "expr": "sum(container_memory_usage_bytes{job=\"cadvisor_ops\",id!=\"/\"})",
           "legendFormat": "Total Memory",
           "refId": "A"
         }
@@ -67,7 +67,7 @@
       "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"cadvisor_ops\",name!=\"\",name!=\"/\",image!=\"\"}[5m])) * 100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"cadvisor_ops\",id!=\"/\"}[5m])) * 100",
           "legendFormat": "Total CPU",
           "refId": "A"
         }
@@ -90,7 +90,7 @@
       "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
       "targets": [
         {
-          "expr": "sum(rate(container_network_receive_bytes_total{job=\"cadvisor_ops\",name!=\"\",name!=\"/\",image!=\"\"}[5m])) + sum(rate(container_network_transmit_bytes_total{job=\"cadvisor_ops\",name!=\"\",name!=\"/\",image!=\"\"}[5m]))",
+          "expr": "sum(rate(container_network_receive_bytes_total{job=\"cadvisor_ops\",id!=\"/\"}[5m])) + sum(rate(container_network_transmit_bytes_total{job=\"cadvisor_ops\",id!=\"/\"}[5m]))",
           "legendFormat": "Network I/O",
           "refId": "A"
         }
@@ -114,7 +114,7 @@
       "options": {"legend": {"calcs": ["mean", "max"], "displayMode": "table", "placement": "right", "showLegend": true, "sortBy": "Max", "sortDesc": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
       "targets": [
         {
-          "expr": "rate(container_cpu_usage_seconds_total{job=\"cadvisor_ops\",name!=\"\",name!=\"/\",image!=\"\"}[5m]) * 100",
+          "expr": "sum by (name) (rate(container_cpu_usage_seconds_total{job=\"cadvisor_ops\",id!=\"/\"}[5m])) * 100",
           "legendFormat": "{{name}}",
           "refId": "A"
         }
@@ -138,7 +138,7 @@
       "options": {"legend": {"calcs": ["mean", "max"], "displayMode": "table", "placement": "right", "showLegend": true, "sortBy": "Max", "sortDesc": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
       "targets": [
         {
-          "expr": "container_memory_usage_bytes{job=\"cadvisor_ops\",name!=\"\",name!=\"/\",image!=\"\"}",
+          "expr": "sum by (name) (container_memory_usage_bytes{job=\"cadvisor_ops\",id!=\"/\"})",
           "legendFormat": "{{name}}",
           "refId": "A"
         }
@@ -162,7 +162,7 @@
       "options": {"legend": {"calcs": ["mean", "max"], "displayMode": "table", "placement": "right", "showLegend": true, "sortBy": "Max", "sortDesc": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
       "targets": [
         {
-          "expr": "rate(container_network_receive_bytes_total{job=\"cadvisor_ops\",name!=\"\",name!=\"/\",image!=\"\"}[5m])",
+          "expr": "sum by (name) (rate(container_network_receive_bytes_total{job=\"cadvisor_ops\",id!=\"/\"}[5m]))",
           "legendFormat": "{{name}} RX",
           "refId": "A"
         }
@@ -186,7 +186,7 @@
       "options": {"legend": {"calcs": ["mean", "max"], "displayMode": "table", "placement": "right", "showLegend": true, "sortBy": "Max", "sortDesc": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
       "targets": [
         {
-          "expr": "rate(container_network_transmit_bytes_total{job=\"cadvisor_ops\",name!=\"\",name!=\"/\",image!=\"\"}[5m])",
+          "expr": "sum by (name) (rate(container_network_transmit_bytes_total{job=\"cadvisor_ops\",id!=\"/\"}[5m]))",
           "legendFormat": "{{name}} TX",
           "refId": "A"
         }

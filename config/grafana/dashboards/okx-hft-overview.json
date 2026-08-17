@@ -61,7 +61,7 @@
       },
       "targets": [
         {
-          "expr": "sum(up == 0) or vector(0)",
+          "expr": "count(up == 0) or vector(0)",
           "legendFormat": "down",
           "refId": "A"
         }
@@ -97,7 +97,7 @@
       },
       "targets": [
         {
-          "expr": "up{job=\"collector\"} or vector(0)",
+          "expr": "max(up{job=\"collector\"}) or vector(0)",
           "legendFormat": "collector",
           "refId": "A"
         }
@@ -135,7 +135,7 @@
       },
       "targets": [
         {
-          "expr": "up{job=\"cadvisor_ops\"} or vector(0)",
+          "expr": "max(up{job=\"cadvisor_ops\"}) or vector(0)",
           "legendFormat": "cadvisor",
           "refId": "A"
         }
@@ -173,7 +173,7 @@
       },
       "targets": [
         {
-          "expr": "{job=\"docker\"}",
+          "expr": "{job=\"docker\"} != \"timestamp too old\"",
           "refId": "A"
         }
       ],
